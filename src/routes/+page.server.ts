@@ -7,7 +7,7 @@ export const load = () => {
     let linkIndex = 0;
     parse.links.forEach((e: object) => {
       linkIndex += 1;
-      if(linkIndex >= 308 && linkIndex < 4000) {
+      if(linkIndex >= 309 && linkIndex < 4000) {
         linkList.push(e);
       }
     })
