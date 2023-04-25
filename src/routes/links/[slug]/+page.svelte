@@ -22,10 +22,7 @@
     ...
   {:then details}
     {#if details}
-      <h3>More Info</h3>
-      <div class="info">
-        {@html details.parse.text['*']}
-      </div>
+      <h3>More...</h3>
 
       <div class="links">
         {#each details.parse.links as link}
