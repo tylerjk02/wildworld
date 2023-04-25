@@ -1,4 +1,10 @@
 export const load = () => {
+  const pushOnCondition = (list: any, index: number, a: any, b: number, c: number) => {
+    if (index >= b && index < c) {
+      list.push(a);
+    }
+  }
+  
   const fetchListPage = async () => {
     const res = await fetch(`https://en.wikipedia.org/w/api.php?action=parse&page=Wikipedia:Unusual_articles&format=json`);
     const returnObj = await res.json();
@@ -7,17 +13,15 @@ export const load = () => {
     let linkIndex = 0;
     parse.links.forEach((e: object) => {
       linkIndex += 1;
-      if(linkIndex >= 309 && linkIndex < 4000) {
-        linkList.push(e);
-      }
+      pushOnCondition(linkList, linkIndex, e, 309, 4750);
     })
-    console.log(linkList);
     const data = linkList;
     return data;
   }
+    
   return {
     streamed: {
-      listPage: fetchListPage()      
+      listPage: fetchListPage(),
     }
   }
 }
