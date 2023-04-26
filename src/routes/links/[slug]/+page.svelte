@@ -15,18 +15,21 @@
   {:then summary}
     <div class="summary">
       <p>{@html summary.extract_html}</p>
+      <a href="https://en.wikipedia.org/wiki/{slug}">Source</a>
     </div>
   {/await}
+
+
   <hr />
   {#await data.streamed.itemDetails}
     ...
   {:then details}
     {#if details}
+    <a href="#images">Jump to Images</a>
       <h3>More...</h3>
-
-      <div class="links">
+      <div id="links" class="links">
         {#each details.parse.links as link}
-          {#if !link['*'].includes('Wikipedia') && !link['*'].includes('Portal') && !link['*'].includes('Template') && !link['*'].includes('Category')}
+          {#if !link["*"].includes("Wikipedia") && !link["*"].includes("Portal") && !link["*"].includes("Template") && !link["*"].includes("Category")}
             <a
               target="_blank"
               href="https://en.wikipedia.org/wiki/{link['*']}"
@@ -39,6 +42,26 @@
       </div>
     {/if}
   {/await}
+
+  
+  <hr />
+  {#await data.streamed.itemPhotos}
+    ...
+  {:then photos} 
+  <a href="#links">Jump to Links</a>
+    <h3>Related Images</h3>
+    <div id="images" class="images">
+      {#each photos.items as photo}
+        {#if photo.hasOwnProperty("srcset")}
+          <div class="image">
+            <img src={photo.srcset[0].src} alt={photo.title} />
+            <p>{photo.title}</p>
+          </div>
+          <!-- <img src="{photo.}" alt=""> -->
+        {/if}
+      {/each}
+    </div>
+  {/await}
 </main>
 
 <style>
@@ -48,5 +71,16 @@
   .link {
     padding: 3px;
     border: 1px solid #111;
+  }
+  .images {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .image {
+    border: 1px solid #111;
+    width: fit-content;
+  }
+  .image img {
+    width: 100%;
   }
 </style>

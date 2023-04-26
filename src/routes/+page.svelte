@@ -1,5 +1,8 @@
 <script lang="ts">
   export let data;
+  const ranNum = () => {
+    return Math.floor(Math.random() * 4000);
+  }
 </script>
 
 <main class="main">
@@ -8,6 +11,7 @@
   {#await data.streamed.listPage}
     Loading
   {:then listLinks}
+    <a href="./links/{listLinks[ranNum()]['*']}">Random</a>
     <h2 id="top">Jump Into...</h2>
     <div class="links">
       {#each listLinks as link}

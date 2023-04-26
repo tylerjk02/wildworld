@@ -13,7 +13,7 @@ export const load = () => {
     let linkIndex = 0;
     parse.links.forEach((e: object) => {
       linkIndex += 1;
-      pushOnCondition(linkList, linkIndex, e, 309, 4750);
+      pushOnCondition(linkList, linkIndex, e, 311, 4750);
     })
     const data = linkList;
     return data;
